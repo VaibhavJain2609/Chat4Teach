@@ -8,13 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @SpringBootApplication
-public class ChatApplication  extends SpringBootServletInitializer {
+public class ChatApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(ChatApplication.class);
 	}
-
+	
+	@RequestMapping("/")
+	@ResponseBody
+	String home() {
+		return "Hello World!";
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ChatApplication.class, args);
 	}
