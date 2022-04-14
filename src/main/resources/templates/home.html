@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Huge Victory</title>
+
+<title>Huge Victory</title>
+<link rel="stylesheet" href="/css/home.css" />
 </head>
 <body>
-<h1>Welcome!</h1>
+	<div id="box">
 
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
-<p>Click <a href="@{/chat}">here</a> to chat.</p>
+		<h1>WELCOME!</h1>
+
+		<p>
+			<a th:href="@{/hello}"><img
+				src=https://www.pngplay.com/wp-content/uploads/1/Login-PNG.png
+				class="center"></a>
+		</p>
+		<p>
+			<a href="@{/chat}"><img
+				src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5b547480-b92d-4dc6-bc9a-593fd94e188b/ddclgo7-53efcedc-2fb7-4a7f-aaf9-739d7248a0b2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzViNTQ3NDgwLWI5MmQtNGRjNi1iYzlhLTU5M2ZkOTRlMTg4YlwvZGRjbGdvNy01M2VmY2VkYy0yZmI3LTRhN2YtYWFmOS03MzlkNzI0OGEwYjIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Ra0CEaU-QHSx3no7oVBvO13wdTIpJiKZ8G0Gfd7SpYA"></a>
+		</p>
+	</div>
+
 </body>
-</html>
