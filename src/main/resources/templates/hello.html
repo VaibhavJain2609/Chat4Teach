@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Hello World!</title>
+<title>Hello World!</title>
+<link rel="stylesheet" href="/css/home.css" />
 </head>
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<p>
-	TEST EDIT HELLO PAGE FILE
-</p>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+	<div align="right" style="vertical-align: top;" >
+		<a id = "borderButton" th:href="@{/home}" style="text-decoration:none">
+		HOMEPAGE
+		</a>
+	</div>
+	<div id = "box">
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" />
+	</form>
+	</div>
 </body>
 </html>
