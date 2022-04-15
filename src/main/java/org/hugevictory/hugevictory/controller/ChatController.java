@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ChatController {
-	
-	@RequestMapping("/butt")
-	public String chat() {
-		return "butt";
-	}
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
