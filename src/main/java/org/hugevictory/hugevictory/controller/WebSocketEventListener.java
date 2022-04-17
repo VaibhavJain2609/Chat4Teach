@@ -35,6 +35,10 @@ public class WebSocketEventListener {
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);
+            
+            if(username.equals("teacher")) {
+            	ChatController.stopChat();
+            }
 
             messagingTemplate.convertAndSend("/topic/public", chatMessage);
         }
