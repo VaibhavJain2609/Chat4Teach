@@ -16,7 +16,7 @@ public class ChatController {
 	private static boolean isChatRunning = false;
 	private static final String TEACHER_USERNAME = "teacher";
 	
-	static public void startChat() {
+ 	static public void startChat() {
 		isChatRunning = true;
 	}
 	
