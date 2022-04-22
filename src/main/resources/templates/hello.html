@@ -9,14 +9,16 @@
 <body>
 	<div align="right" style="vertical-align: top;" >
 		<a id = "borderButton" th:href="@{/home}" style="text-decoration:none">
-		HOMEPAGE
+		HOME
 		</a>
 	</div>
-	<div id = "box">
-	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out" />
-	</form>
+	<div id="buttonStyle">
+		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+		
+			<form th:action="@{/logout}" method="post">
+				<button>Sign Out</button>
+			</form>
+
 	</div>
 </body>
 </html>

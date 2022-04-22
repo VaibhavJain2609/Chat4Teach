@@ -3,15 +3,72 @@ a, a:hover, a:focus, a:active {
       color: inherit;
  }
 
-#borderButton {
-	border-style: solid;
-	border-width: 5px;
-	border-color: #F0FFFF;
-	color: black;
+
+button {
+	background-color: blue;
+	border: 2px solid black;
+	color: whitesmoke;
+	padding: 1em 1.5em;
+	text-align: center;
+	text-decoration: none;
+	font-size: 3em;
+	display: inline-block;
+	width: auto%;
+	border-radius: 5px;
+	box-shadow: 3px 3px 8px 0 #000;
+}
+
+
+#formChange{
+	background-color: blue;
+	border: 2px solid black;
+	color: whitesmoke;
+	padding: 1em 1.5em;
+	text-align: center;
+	text-decoration: none;
+	font-size: 3em;
+	display: inline-block;
+	width: auto;
+	border-radius: 5px;
+	box-shadow: 3px 3px 8px 0 #000;
+}
+
+#borderButton  {
+	line-height: 12px;
+	width: auto;
+	
+	font-family: tahoma;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: blue;
+	border: 2px solid black;
+	color: whitesmoke;
+	padding: 1px 1px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 20px;
+	display: inline-block;
+	width: auto;
+	border-radius: 1px;
+	box-shadow: 3px 3px 8px 0 #000;
 }
 
 body  {
-	background-color: powderblue;
+	background-color: white;
+}
+
+#buttonStyle {
+	width: auto;
+	height: auto;
+	border: 15px solid black;
+	background-color: white;
+	padding: 50px;
+	margin: 20px;
+	text-align: center;
+	display: block;
+	
+	
 }
 
 img {
@@ -19,15 +76,16 @@ img {
 	height: 50%;
 }
 #box  {
+	color: white;
 	text-align: center;
 	border-style: groove;
 	border-width: 20px;
-	border-color: #F0FFFF;
+	border-color: black;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	width: 50%;
-	background-color: coral;
+	background-color: #9932CC;
 
 }
 	

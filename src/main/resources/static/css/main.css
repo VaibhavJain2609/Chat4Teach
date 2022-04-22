@@ -33,11 +33,12 @@ body:before {
     z-index: 0;
 }
 
+
 #borderButton {
 	border-style: solid;
 	border-width: 5px;
-	border-color: #F0FFFF;
-	color: black;
+	border-color: white;
+	color: white;
 }
 
 .clearfix:after {
@@ -73,6 +74,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
     font-size: 1.7em;
+    color: white;
 }
 
 a {
@@ -117,7 +119,7 @@ button.accent {
 }
 
 .username-page-container {
-    background: #fff;
+    background: black;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
     width: 100%;
