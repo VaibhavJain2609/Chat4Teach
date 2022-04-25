@@ -9,6 +9,8 @@ var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
+var params = null;
+var currentURL = null;
 var username = null;
 
 var colors = [
@@ -16,9 +18,15 @@ var colors = [
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
-function connect(event) {
-    username = document.querySelector('#name').value.trim();
+function getUsername(url, callback){
+	console.log("getting username");
+	jQuery.get(url, function(data){
+		name = String(data);
+		callback(name);
+	});
+}
 
+function revealChat() {
     if(username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
@@ -27,10 +35,28 @@ function connect(event) {
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
-    }
-    event.preventDefault();
+    }	
 }
 
+function connect(event) {
+    //username = document.querySelector('#name').value.trim();
+    params = new URLSearchParams(window.location.search);
+    currentURL = window.location.pathname;
+    
+    console.log(currentURL);
+    if(currentURL == "/StudentPortal") {
+	    getUsername('/students', function(data){
+			username = data;
+			console.log("got username" + username);
+			revealChat();
+		});
+	} else if (currentURL == "/chat") {
+		username = 'teacher';
+		revealChat();
+	}
+    
+    event.preventDefault();
+}
 
 function onConnected() {
     // Subscribe to the Public Topic
