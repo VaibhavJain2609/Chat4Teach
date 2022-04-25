@@ -7,14 +7,12 @@
 <link rel="stylesheet" href="/css/home.css" />
 </head>
 <body>
-	<div align="right" style="vertical-align: top;" >
-		<a id = "borderButton" th:href="@{/home}" style="text-decoration:none">
-		HOME
-		</a>
-	</div>
 	<div id="buttonStyle">
 		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-		
+
+		<a id="borderButton" th:href="@{/home}"
+		   style="text-decoration: none"> HOMEPAGE </a>
+		<br>
 			<form th:action="@{/logout}" method="post">
 				<button>Sign Out</button>
 			</form>
