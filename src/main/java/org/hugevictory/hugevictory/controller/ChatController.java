@@ -26,9 +26,7 @@ public class ChatController {
 	private static final String TEACHER_USERNAME = "teacher";
 	private Student student = new Student(12345, "Stu Dent");
 	private Student[] classroom = new Student[5];
-	private Map<String, String> studentMap = Map.of("12345", "Stu Dent",
-														 "86753", "John Doe",
-														 "41382", "Bill Agrinson");
+	private Map<String, String> studentMap = new HashMap<>();
 	
  	static public void startChat() {
 		isChatRunning = true;
@@ -58,6 +56,9 @@ public class ChatController {
 	
 	@RequestMapping("/StudentPortal")
 	public String foo(@RequestParam("UUID")String StudentID) {
+		studentMap.put("12345", "Stu Dent");
+		studentMap.put("86753", "John Doe");
+		studentMap.put("41382", "Bill Agrinson");
 		System.out.println(StudentID);
 		if(studentMap.containsKey(StudentID)) {
 			return "chat";
