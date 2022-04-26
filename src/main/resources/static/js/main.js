@@ -19,8 +19,9 @@ var colors = [
 ];
 
 function getUsername(url, callback){
-	console.log("getting username");
-	jQuery.get(url, function(data){
+    params = new URLSearchParams(window.location.search);
+	console.log("getting username " + params.get("UUID"));
+	jQuery.get(url, {id: params.get("UUID")}, function(data){
 		name = String(data);
 		callback(name);
 	});
@@ -40,7 +41,6 @@ function revealChat() {
 
 function connect(event) {
     //username = document.querySelector('#name').value.trim();
-    params = new URLSearchParams(window.location.search);
     currentURL = window.location.pathname;
     
     console.log(currentURL);

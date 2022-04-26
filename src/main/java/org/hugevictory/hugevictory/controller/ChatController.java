@@ -1,5 +1,8 @@
 package org.hugevictory.hugevictory.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.hugevictory.hugevictory.model.ChatMessage;
 import org.hugevictory.hugevictory.model.Student;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,10 @@ public class ChatController {
 	private static boolean isChatRunning = false;
 	private static final String TEACHER_USERNAME = "teacher";
 	private Student student = new Student(12345, "Stu Dent");
+	private Student[] classroom = new Student[5];
+	private Map<String, String> studentMap = Map.of("12345", "Stu Dent",
+														 "86753", "John Doe",
+														 "41382", "Bill Agrinson");
 	
  	static public void startChat() {
 		isChatRunning = true;
@@ -50,9 +57,9 @@ public class ChatController {
 	}
 	
 	@RequestMapping("/StudentPortal")
-	public String foo(@RequestParam("UUID")int StudentID) {
+	public String foo(@RequestParam("UUID")String StudentID) {
 		System.out.println(StudentID);
-		if(StudentID == student.getUUID()) {
+		if(studentMap.containsKey(StudentID)) {
 			return "chat";
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
@@ -76,10 +83,10 @@ public class ChatController {
         return chatMessage;
     }
     
-    @RequestMapping(value = "/students", method = RequestMethod.GET, produces = "text/plain")
+    @RequestMapping(value = "/students", params = {"id"}, method = RequestMethod.GET, produces = "text/plain")
     @ResponseBody
-    public String getStudentInfo(/*@RequestParam String inputParameter*/) {
-    	String result = student.getName();
+    public String getStudentInfo(@RequestParam("id") String id) {
+    	String result = studentMap.get(id);
     	return result;
     }
 
