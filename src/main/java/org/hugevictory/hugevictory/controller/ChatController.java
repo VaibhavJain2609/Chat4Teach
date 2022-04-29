@@ -46,12 +46,7 @@ public class ChatController {
 		} catch(Exception e) {
 			System.out.println("is a null user");
 		}
-		
-		if(isChatRunning) {
-			return "chat";
-		} else {
-			return "redirect";
-		}
+		return "chat";
 	}
 	
 	@RequestMapping("/StudentPortal")
@@ -59,11 +54,15 @@ public class ChatController {
 		studentMap.put("12345", "Stu Dent");
 		studentMap.put("86753", "John Doe");
 		studentMap.put("41382", "Bill Agrinson");
-		System.out.println(StudentID);
-		if(studentMap.containsKey(StudentID)) {
-			return "chat";
+		
+		if(StudentID != null && isChatRunning) {
+			if(studentMap.containsKey(StudentID)) {
+				return "chat";
+			} else {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+			}
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
+			return "redirect";
 		}
 	}
 
