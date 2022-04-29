@@ -4,11 +4,13 @@ public class ChatMessage {
     private MessageType type;
     private String content;
     private String sender;
+    private String target;
 
     public enum MessageType {
         CHAT,
         JOIN,
-        LEAVE
+        LEAVE,
+        DIRECTED
     }
 
     public MessageType getType() {
@@ -34,4 +36,12 @@ public class ChatMessage {
     public void setSender(String sender) {
         this.sender = sender;
     }
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
+	}
 }

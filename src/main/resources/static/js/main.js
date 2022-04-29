@@ -81,11 +81,20 @@ function onError(error) {
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
     if(messageContent && stompClient) {
-        var chatMessage = {
-            sender: username,
-            content: messageInput.value,
-            type: 'CHAT'
-        };
+		if(username == 'teacher'){
+	        var chatMessage = {
+	            sender: username,
+	            content: messageInput.value,
+	            type: 'CHAT'
+	        };
+        } else {
+			var chatMessage = {
+				sender: username,
+				content: messageInput.value,
+				type: 'DIRECTED',
+				target: 'teacher'
+			}
+		}
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
@@ -95,16 +104,18 @@ function sendMessage(event) {
 
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
+    var messageRecieved = false;
 
     var messageElement = document.createElement('li');
-
     if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
+		messageRecieved = true;
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
-    } else {
+		messageRecieved = true;
+    } else if (message.type === 'CHAT' || (message.type === 'DIRECTED' && message.target == username) || message.sender == username){
         messageElement.classList.add('chat-message');
 
         var avatarElement = document.createElement('i');
@@ -118,16 +129,20 @@ function onMessageReceived(payload) {
         var usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
+        
+		messageRecieved = true;
     }
-
-    var textElement = document.createElement('p');
-    var messageText = document.createTextNode(message.content);
-    textElement.appendChild(messageText);
-
-    messageElement.appendChild(textElement);
-
-    messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
+	
+	if(messageRecieved) {
+	    var textElement = document.createElement('p');
+	    var messageText = document.createTextNode(message.content);
+	    textElement.appendChild(messageText);
+	
+	    messageElement.appendChild(textElement);
+	
+	    messageArea.appendChild(messageElement);
+	    messageArea.scrollTop = messageArea.scrollHeight;
+    }
 }
 
 
