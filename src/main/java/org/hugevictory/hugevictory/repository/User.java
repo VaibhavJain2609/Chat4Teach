@@ -1,17 +1,19 @@
-package org.hugevictory.hugevictory.model;
+package org.hugevictory.hugevictory.repository;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class Student {
+@Entity // This tells Hibernate to make a table out of this class
+public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	private String UUID;
+
 	private String name;
+
+	private String email;
 
 	public Integer getId() {
 		return id;
@@ -20,20 +22,20 @@ public class Student {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getUUID() {
-		return UUID;
-	}
-	
-	public void setUUID(String UUID) {
-		this.UUID = UUID;
-	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -24,7 +24,7 @@ public class ChatController {
 	
 	private static boolean isChatRunning = false;
 	private static final String TEACHER_USERNAME = "teacher";
-	private Student student = new Student(12345, "Stu Dent");
+	//private Student student = new Student("12345", "Stu Dent");
 	private Student[] classroom = new Student[5];
 	private Map<String, String> studentMap = new HashMap<>();
 	
