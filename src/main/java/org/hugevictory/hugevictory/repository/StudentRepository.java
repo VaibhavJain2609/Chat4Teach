@@ -1,5 +1,4 @@
 package org.hugevictory.hugevictory.repository;
-
 import org.hugevictory.hugevictory.model.Student;
 import org.springframework.data.repository.CrudRepository;
 
@@ -7,5 +6,4 @@ import org.springframework.data.repository.CrudRepository;
 // CRUD refers Create, Read, Update, Delete
 
 public interface StudentRepository extends CrudRepository<Student, Integer> {
-
 }
