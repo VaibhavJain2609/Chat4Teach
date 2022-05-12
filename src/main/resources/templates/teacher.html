@@ -11,10 +11,26 @@
 		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 
 		<a id="borderButton" th:href="@{/home}"
-		   style="text-decoration: none"> Home Page </a>
+		   style="text-decoration: none"> HOME </a>
 		<br>
+		<h2>ADD STUDENT</h2>
+			<form th:action="@{/students/new}" th:object="${student}" method="post" >
+				<input id = altForm type="text" th:field="*{name}" />
+				<input id = altForm type="hidden" th:field="*{UUID}" />
+				
+			</form>
+		<h2>DELETE STUDENT</h2>
+			<form  th:action="@{/students/new}" th:object="${student}" method="post">
+				<input id = altForm type="text" th:field="*{name}" />
+				<input id = altForm type="hidden" th:field="*{UUID}" />
+				
+			</form>
+			<br>
 		<table>
 			<thead>
+			<tr>
+				<th>List of Students</th>
+			</tr>
 			<tr>
 				<th>Id</th>
 				<th>Student Name</th>
@@ -35,19 +51,8 @@
 			</tr>
 			</tbody>
 		</table>
-		<br>
-		<h2>ADD STUDENT</h2>
-			<form th:action="@{/students/new}" th:object="${student}" method="post" >
-				<input type="text" th:field="*{name}" />
-				<input type="hidden" th:field="*{UUID}" />
-				
-			</form>
-		<h2>DELETE STUDENT</h2>
-			<form th:action="@{/students/new}" th:object="${student}" method="post" >
-				<input type="text" th:field="*{name}" />
-				<input type="hidden" th:field="*{UUID}" />
-				
-			</form>
+		
+		
 
 	</div>
 </body>
