@@ -36,9 +36,17 @@
 			</tbody>
 		</table>
 		<br>
-			<form th:action="@{/students/new}" th:object="${student}" method="post">
+		<h2>ADD STUDENT</h2>
+			<form th:action="@{/students/new}" th:object="${student}" method="post" >
 				<input type="text" th:field="*{name}" />
 				<input type="hidden" th:field="*{UUID}" />
+				
+			</form>
+		<h2>DELETE STUDENT</h2>
+			<form th:action="@{/students/new}" th:object="${student}" method="post" >
+				<input type="text" th:field="*{name}" />
+				<input type="hidden" th:field="*{UUID}" />
+				
 			</form>
 
 	</div>
