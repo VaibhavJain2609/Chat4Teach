@@ -8,9 +8,16 @@
 <link rel="stylesheet" href="/css/home.css" />
 </head>
 <body>
+	<a id="borderButton" th:href="@{/home}" style="text-decoration: none">
+		HOMEPAGE </a>
 	<div id="buttonStyle">
 
-		<h1>YOU DO NOT HAVE PERMISSION</h1>
-			<a th:href="@{/home}"><button>HOMEPAGE</button></a>
+		<h1>WELCOME TEACHER</h1>
+
+		<form th:action="@{/logout}" method="post">
+			<button>Sign Out</button>
+		</form>
+		<br></br>
+		<a><button>Add Student</button></a> <a><button>Delete Student</button></a>
 	</div>
 </body>
