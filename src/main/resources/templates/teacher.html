@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Huge Victory</title>
+<link rel="stylesheet" href="/css/home.css" />
+</head>
+<body>
+	<div id="buttonStyle">
+		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+		<a id="borderButton" th:href="@{/home}"
+		   style="text-decoration: none"> Home Page </a>
+		<br>
+		<table>
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Student Name</th>
+				<th>UUID</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="row : ${students}">
+				<td>
+					<span type="text" th:text="${row.id}" />
+				</td>
+				<td>
+					<span type="text" th:text="${row.name}" />
+				</td>
+				<td>
+					<span type="text" th:text="${row.UUID}" />
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<br>
+			<form th:action="@{/students/new}" th:object="${student}" method="post">
+				<input type="text" th:field="*{name}" />
+				<input type="hidden" th:field="*{UUID}" />
+			</form>
+
+	</div>
+</body>
+</html>

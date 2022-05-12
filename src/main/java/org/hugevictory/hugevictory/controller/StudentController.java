@@ -1,17 +1,16 @@
-package org.hugevictory.hugevictory.repository;
+package org.hugevictory.hugevictory.controller;
 
 import java.util.List;
 
 import java.util.Optional;
 import org.hugevictory.hugevictory.model.Student;
+import org.hugevictory.hugevictory.repository.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
-@RestController	
+@Controller
 public class StudentController
 {
 	@Autowired
@@ -29,10 +28,10 @@ public class StudentController
 		return studentService.getStudent(id);
 	}
 	
-	@RequestMapping(value="/students", method=RequestMethod.POST)
-	public void addStudent(@RequestBody Student student)
-	{
+	@RequestMapping(value="/students/new", method=RequestMethod.POST)
+	public String addStudent(@ModelAttribute("student") Student student, BindingResult result) {
 		studentService.addStudent(student);
+		return "redirect:/teacher";
 	}
 	
 	@RequestMapping(value="/students/{id}", method = RequestMethod.PUT)
