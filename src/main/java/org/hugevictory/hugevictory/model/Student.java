@@ -1,17 +1,24 @@
 package org.hugevictory.hugevictory.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column(unique = true)
 	private String UUID;
 	private String name;
+	private boolean chatEnabled;
+
+	public boolean isChatEnabled() {
+		return chatEnabled;
+	}
+	public void setIsChatEnabled(boolean chatEnabled) {
+		this.chatEnabled = !chatEnabled;
+	}
+
 	private int MAX_LENGTH_UUID = 5;
 	public Integer getId() {
 		return id;
