@@ -141,10 +141,14 @@ function onMessageReceived(payload) {
 	    messageElement.appendChild(textElement);
 	
 	    messageArea.appendChild(messageElement);
+        playSound("notification.mp3")
 	    messageArea.scrollTop = messageArea.scrollHeight;
     }
 }
-
+function playSound(url) {
+  const audio = new Audio(url);
+  audio.play();
+}
 
 function getAvatarColor(messageSender) {
     var hash = 0;

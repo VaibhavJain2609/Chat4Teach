@@ -31,6 +31,7 @@ public class StudentController
 	
 	@RequestMapping(value="/students/new", method=RequestMethod.POST)
 	public String addStudent(@ModelAttribute("student") Student student, BindingResult result) {
+		student.setRandomUUID();
 		studentService.addStudent(student);
 		return "redirect:/teacher";
 	}
