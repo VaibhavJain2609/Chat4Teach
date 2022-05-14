@@ -7,6 +7,7 @@ import org.hugevictory.hugevictory.model.Student;
 import org.hugevictory.hugevictory.repository.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,10 +41,11 @@ public class StudentController
     	return studentService.updateStudent(id, student);
     }
     
-    @RequestMapping(value="/students/{id}", method = RequestMethod.DELETE)
-    public String deleteStudent(@PathVariable int id)
+    @RequestMapping(value="/students/delete/{id}", method = RequestMethod.GET)
+    public String deleteStudent(@PathVariable int id, BindingResult result, Model model)
     {
-    	return studentService.deleteStudent(id);
+		studentService.deleteStudent(id);
+		return "redirect:/teacher";
     }
 	
 }
