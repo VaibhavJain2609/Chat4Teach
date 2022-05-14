@@ -1,6 +1,5 @@
 package org.hugevictory.hugevictory.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.hugevictory.hugevictory.model.Student;
@@ -26,6 +25,18 @@ public class StudentService
 	public Optional<Student> getStudent(int id)
 	{
 		return studentRepository.findById(id);
+	}
+	
+	public Student getStudentByUUID(String UUID) {
+		List<Student> studentList = this.getAllStudents();
+		Student foundStudent = null;
+		for(Student s : studentList) {
+			if(s.getUUID().equals(UUID)) {
+				foundStudent = s;
+				break;
+			}
+		}
+		return foundStudent;
 	}
 	
 	public void updateStudent(Student student)
