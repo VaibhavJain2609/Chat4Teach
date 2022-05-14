@@ -28,21 +28,9 @@ public class StudentService
 		return studentRepository.findById(id);
 	}
 	
-	public String updateStudent(int id, Student student)
+	public void updateStudent(Student student)
 	{
-		Optional<Student> studentOptional = studentRepository.findById(id);
-		if(!studentOptional.isPresent())
-		{
-			student.setId(id);
 			studentRepository.save(student);
-			return "student added";
-		}
-		else
-		{
-			student.setId(id);
-			studentRepository.save(student);
-			return "student updated";
-		}
 	}
 	
 	public String deleteStudent(int id)

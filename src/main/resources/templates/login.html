@@ -6,10 +6,10 @@
 <title>Spring Security Example</title>
 <link rel="stylesheet" href="/css/home.css" />
 </head>
+
 <body>
-	<a id = "borderButton" th:href="@{/home}" style="text-decoration:none">
-		HOME
-		</a>
+	<a th:href="@{/home}"
+	   class="btn btn-info btn-sm btn-block" > HOME </a>
 	<div id="buttonStyle">
 		
 		<div th:if="${param.error}">Invalid username and password.</div>

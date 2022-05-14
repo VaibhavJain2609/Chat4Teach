@@ -10,78 +10,36 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-<script>
-	$(document).ready(function(){
-		$('[data-toggle="tooltip"]').tooltip();
-		var actions = $("table td:last-child").html();
-		// Append table with add row form on add new button click
-		$(".add-new").click(function(){
-			$(this).attr("disabled", "disabled");
-			var index = $("table tbody tr:last-child").index();
-			var row = '<tr>' +
-					'<td><input type="text" class="form-control" name="name" id="name"></td>' +
-					'<td><input type="text" class="form-control" name="department" id="department"></td>' +
-					'<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
-					'<td>' + actions + '</td>' +
-					'</tr>';
-			$("table").append(row);
-			$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-		// Add row on add button click
-		$(document).on("click", ".add", function(){
-			var empty = false;
-			var input = $(this).parents("tr").find('input[type="text"]');
-			input.each(function(){
-				if(!$(this).val()){
-					$(this).addClass("error");
-					empty = true;
-				} else{
-					$(this).removeClass("error");
-				}
-			});
-			$(this).parents("tr").find(".error").first().focus();
-			if(!empty){
-				input.each(function(){
-					$(this).parent("td").html($(this).val());
-				});
-				$(this).parents("tr").find(".add, .edit").toggle();
-				$(".add-new").removeAttr("disabled");
-			}
-		});
-		// Edit row on edit button click
-		$(document).on("click", ".edit", function(){
-			$(this).parents("tr").find("td:not(:last-child)").each(function(){
-				$(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-			});
-			$(this).parents("tr").find(".add, .edit").toggle();
-			$(".add-new").attr("disabled", "disabled");
-		});
-		// Delete row on delete button click
-		$(document).on("click", ".delete", function(){
-			$(this).parents("tr").remove();
-			$(".add-new").removeAttr("disabled");
-		});
-	});
-</script>
-
 <head>
 <title>Huge Victory</title>
 <link rel="stylesheet" href="/css/home.css" />
 </head>
 
 <body>
+	<a th:href="@{/home}"
+	   class="btn btn-info btn-sm btn-block" > HOME </a>
 	<div id="buttonStyle">
 		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-
-		<a id="borderButton" th:href="@{/home}"
-		   style="text-decoration: none"> HOME </a>
 		<br>
 		<h2>ADD STUDENT</h2>
-			<form th:action="@{/students/new}" th:object="${student}" method="post" >
-				<input id = altForm type="text" th:field="*{name}" />
-				<input id = altForm type="hidden" th:field="*{UUID}" />
-				
+			<form class="center w-50 p-3" th:action="@{/students/new}" th:object="${student}" method="post" >
+				<div class="form-group mx-sm-3 mb-2">
+					<label for="name">Name</label>
+					<input id = "name" type="text" class="form-control" placeholder="Student Name" th:field="*{name}" />
+
+					<input id = "UUID" type="hidden" th:field="*{UUID}" />
+				</div>
+				<div class="form-group mx-sm-3 mb-2">
+					<label for="name">Chat Enabled</label>
+					<select class="form-control" th:field="*{chatEnabled}">
+						<option th:value="'true'" th:text="True"></option>
+						<option th:value="'false'" th:text="False"></option>
+					</select>
+
+					<br>
+
+					<input class="btn btn-info btn-sm w-50" type="submit" value="Submit">
+				</div>
 			</form>
 			<br>
 		<div class="container-lg">
@@ -90,9 +48,6 @@
 					<div class="table-title">
 						<div class="row">
 							<div class="col-sm-8"><h2><b>List of Students</b></h2></div>
-							<div class="col-sm-4">
-								<button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-							</div>
 						</div>
 					</div>
 		<table class="table table-bordered">
@@ -101,6 +56,7 @@
 				<th>Id</th>
 				<th>Student Name</th>
 				<th>UUID</th>
+				<th>Chat Enabled</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -115,8 +71,10 @@
 					<span type="text" th:text="${row.UUID}" />
 				</td>
 				<td>
-					<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-					<a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+					<span type="text" th:text="${row.chatEnabled}"/>
+				</td>
+				<td>
+					<a th:href="@{/student/edit/} + ${row.id}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
 					<a th:href="@{/student/delete/} + ${row.id}" class="delete" title="Delete" data-toggle="tooltip" onClick="return confirm('sure?')"><i class="material-icons">&#xE872;</i></a>
 				</td>
 			</tr>

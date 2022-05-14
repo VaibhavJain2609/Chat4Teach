@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.swing.text.html.Option;
 
 @Controller
 public class StudentController
@@ -35,15 +38,34 @@ public class StudentController
 		studentService.addStudent(student);
 		return "redirect:/teacher";
 	}
-	
-	@RequestMapping(value="/students/{id}", method = RequestMethod.PUT)
-    public String updateStudent(@RequestBody Student student, @PathVariable int id)
-    {
-    	return studentService.updateStudent(id, student);
-    }
+
+	@RequestMapping(value="/student/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView editStudent(@PathVariable int id, ModelAndView modelAndView)
+	{
+		Optional<Student> student = studentService.getStudent(id);
+		if(student.isPresent()) {
+			modelAndView.addObject("student", student);
+			modelAndView.setViewName("editStudent");
+			return modelAndView;
+		}
+		return new ModelAndView("redirect:/teacher");
+	}
+
+	@RequestMapping(value="/student/edit", method = RequestMethod.POST)
+	public String editStudent(@ModelAttribute("student") Student student, BindingResult result)
+	{
+		Optional<Student> studentOptional = studentService.getStudent(student.getId());
+		if(studentOptional.isPresent()) {
+			Student studentDB = studentOptional.get();
+			studentDB.setName(student.getName());
+			studentDB.setIsChatEnabled(student.isChatEnabled());
+			studentService.updateStudent(studentDB);
+		}
+		return "redirect:/teacher";
+	}
     
-    @RequestMapping(value="/students/delete/{id}", method = RequestMethod.GET)
-    public String deleteStudent(@PathVariable int id, BindingResult result, Model model)
+    @RequestMapping(value="/student/delete/{id}", method = RequestMethod.GET)
+    public String deleteStudent(@PathVariable int id)
     {
 		studentService.deleteStudent(id);
 		return "redirect:/teacher";
