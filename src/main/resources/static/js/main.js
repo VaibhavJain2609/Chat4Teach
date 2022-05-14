@@ -141,7 +141,7 @@ function onMessageReceived(payload) {
 	    messageElement.appendChild(textElement);
 	
 	    messageArea.appendChild(messageElement);
-        playSound("notification.mp3")
+        playSound("https://audio.code.org/goal1.mp3")
 	    messageArea.scrollTop = messageArea.scrollHeight;
     }
 }
