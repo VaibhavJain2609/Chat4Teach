@@ -20,9 +20,8 @@
 				
 			</form>
 		<h2>DELETE STUDENT</h2>
-			<form  th:action="@{/students/new}" th:object="${student}" method="post">
-				<input id = altForm type="text" th:field="*{name}" />
-				<input id = altForm type="hidden" th:field="*{UUID}" />
+			<form  th:action="@{/students/{id}}" th:object="${student}" method="delete">
+				<input id = altForm type="text" th:field="*{id}" />
 				
 			</form>
 			<br>
