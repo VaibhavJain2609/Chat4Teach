@@ -25,7 +25,7 @@ public class ChatMessageController
 	}
 
 	@RequestMapping(value = "/messages", method = RequestMethod.GET, produces = "application/json")
-	public List<ChatMessage> getAllChatMessages(){return  chatMessageService.getAllChatMessages();};
+	public List<ChatMessage> getAllChatMessages(){return  chatMessageService.getAllChatMessages();}
 
 	@RequestMapping(value="/messages/add", method=RequestMethod.POST)
 	public void addChatMessage(@RequestBody ChatMessage chatMessage)
