@@ -1,10 +1,20 @@
 package org.hugevictory.hugevictory.model;
 
+import java.util.Date;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class ChatMessage {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
     private MessageType type;
     private String content;
     private String sender;
     private String target;
+    private Date time = new Date();
 
     public enum MessageType {
         CHAT,
@@ -43,5 +53,19 @@ public class ChatMessage {
 
 	public void setTarget(String target) {
 		this.target = target;
+	}
+
+	/**
+	 * @return the time
+	 */
+	public Date getTime() {
+		return time;
+	}
+
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }
