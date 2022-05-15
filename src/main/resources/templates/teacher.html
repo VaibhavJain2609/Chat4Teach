@@ -56,7 +56,6 @@
 				<th>Id</th>
 				<th>Student Name</th>
 				<th>UUID</th>
-				<th>Chat Enabled</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -69,9 +68,6 @@
 				</td>
 				<td>
 					<span type="text" th:text="${row.UUID}" />
-				</td>
-				<td>
-					<span type="text" th:text="${row.chatEnabled}"/>
 				</td>
 				<td>
 					<a th:href="@{/student/edit/} + ${row.id}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>

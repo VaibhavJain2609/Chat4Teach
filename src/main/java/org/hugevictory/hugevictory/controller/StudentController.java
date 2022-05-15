@@ -63,7 +63,7 @@ public class StudentController
 		if(studentOptional.isPresent()) {
 			Student studentDB = studentOptional.get();
 			studentDB.setName(student.getName());
-			studentDB.setIsChatEnabled(student.isChatEnabled());
+			//studentDB.setIsChatEnabled(student.isChatEnabled());
 			studentService.updateStudent(studentDB);
 		}
 		return new ModelAndView("redirect:/teacher");

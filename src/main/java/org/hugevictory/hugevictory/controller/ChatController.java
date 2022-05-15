@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.hugevictory.hugevictory.model.ChatMessage;
 import org.hugevictory.hugevictory.model.Student;
+import org.hugevictory.hugevictory.repository.ChatMessageRepository;
+import org.hugevictory.hugevictory.repository.ChatMessageService;
 import org.hugevictory.hugevictory.repository.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +29,7 @@ public class ChatController {
 	private static boolean isChatRunning = false;
 	private static final String TEACHER_USERNAME = "teacher";
 	private Map<String, String> studentMap = new HashMap<>();
-	
+	private ChatMessageService chatMessageService;
 	@Autowired
 	private StudentService studentService;
 	
@@ -69,6 +71,7 @@ public class ChatController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+		 chatMessageService.addChatMessage(chatMessage);
         return chatMessage;
     }
 
