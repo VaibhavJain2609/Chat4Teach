@@ -38,10 +38,10 @@ public class StudentController
 	}
 	
 	@RequestMapping(value="/students/new", method=RequestMethod.POST)
-	public String addStudent(@ModelAttribute("student") Student student, BindingResult result) {
+	public ModelAndView addStudent(@ModelAttribute("student") Student student, BindingResult result) {
 		student.setRandomUUID();
 		studentService.addStudent(student);
-		return "redirect:/teacher";
+		return new ModelAndView("redirect:/teacher");
 	}
 
 	@RequestMapping(value="/student/edit/{id}", method = RequestMethod.GET)
@@ -57,7 +57,7 @@ public class StudentController
 	}
 
 	@RequestMapping(value="/student/edit", method = RequestMethod.POST)
-	public String editStudent(@ModelAttribute("student") Student student, BindingResult result)
+	public ModelAndView editStudent(@ModelAttribute("student") Student student, BindingResult result)
 	{
 		Optional<Student> studentOptional = studentService.getStudent(student.getId());
 		if(studentOptional.isPresent()) {
@@ -66,14 +66,14 @@ public class StudentController
 			studentDB.setIsChatEnabled(student.isChatEnabled());
 			studentService.updateStudent(studentDB);
 		}
-		return "redirect:/teacher";
+		return new ModelAndView("redirect:/teacher");
 	}
     
     @RequestMapping(value="/student/delete/{id}", method = RequestMethod.GET)
-    public String deleteStudent(@PathVariable int id)
+    public ModelAndView deleteStudent(@PathVariable int id)
     {
 		studentService.deleteStudent(id);
-		return "redirect:/teacher";
+		return new ModelAndView("redirect:/teacher");
     }
 	
 }
