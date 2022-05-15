@@ -1,5 +1,6 @@
 package org.hugevictory.hugevictory.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.hugevictory.hugevictory.model.ChatMessage;
@@ -22,7 +23,10 @@ public class ChatMessageController
 	{
 		return chatMessageService.getChatMessage(id);
 	}
-	
+
+	@RequestMapping(value = "/messages", method = RequestMethod.GET, produces = "application/json")
+	public List<ChatMessage> getAllChatMessages(){return  chatMessageService.getAllChatMessages();};
+
 	@RequestMapping(value="/messages/add", method=RequestMethod.POST)
 	public void addChatMessage(@RequestBody ChatMessage chatMessage)
 	{

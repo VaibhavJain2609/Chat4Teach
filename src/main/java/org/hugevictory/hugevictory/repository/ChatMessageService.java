@@ -1,5 +1,6 @@
 package org.hugevictory.hugevictory.repository;
 
+import java.util.List;
 import java.util.Optional;
 import org.hugevictory.hugevictory.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,9 @@ public class ChatMessageService
 	public Optional<ChatMessage> getChatMessage(int id)
 	{
 		return chatMessageRepository.findById(id);
+	}
+
+	public List<ChatMessage> getAllChatMessages() {
+		return chatMessageRepository.findAll();
 	}
 }
