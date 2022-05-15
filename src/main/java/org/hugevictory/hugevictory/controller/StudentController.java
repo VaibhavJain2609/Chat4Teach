@@ -14,19 +14,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.swing.text.html.Option;
 
-@Controller
+@RestController
 public class StudentController
 {
 	@Autowired
 	private StudentService studentService;
 	
-	@RequestMapping(value = "/students")
+	@RequestMapping(value = "/students", method=RequestMethod.GET)
 	public List<Student> getAllStudents()
 	{
 		return studentService.getAllStudents();
 	}
 	
-	@RequestMapping(value="/students/{id}")
+	@RequestMapping(value="/students/UUID/{UUID}", method = RequestMethod.GET, produces = "application/json")
+	public Student getStudentByUUID(@PathVariable String UUID){
+		return studentService.getStudentByUUID(UUID);
+	}
+	
+	@RequestMapping(value="/students/{id}", method = RequestMethod.GET, produces = "application/json")
 	public Optional<Student> getStudent(@PathVariable int id)
 	{
 		return studentService.getStudent(id);

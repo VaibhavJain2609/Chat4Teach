@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.hugevictory.hugevictory.model.ChatMessage;
 import org.hugevictory.hugevictory.model.Student;
+import org.hugevictory.hugevictory.repository.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -24,9 +26,10 @@ public class ChatController {
 	
 	private static boolean isChatRunning = false;
 	private static final String TEACHER_USERNAME = "teacher";
-	//private Student student = new Student("12345", "Stu Dent");
-	private Student[] classroom = new Student[5];
 	private Map<String, String> studentMap = new HashMap<>();
+	
+	@Autowired
+	private StudentService studentService;
 	
  	static public void startChat() {
 		isChatRunning = true;
@@ -51,18 +54,15 @@ public class ChatController {
 	
 	@RequestMapping("/StudentPortal")
 	public String foo(@RequestParam("UUID")String StudentID) {
-		studentMap.put("12345", "Stu Dent");
-		studentMap.put("86753", "John Doe");
-		studentMap.put("41382", "Bill Agrinson");
 		
 		if(StudentID != null && isChatRunning) {
-			if(studentMap.containsKey(StudentID)) {
+			if(studentService.getStudentByUUID(StudentID) != null) {
 				return "chat";
 			} else {
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
 			}
 		} else {
-			return "redirect";
+			return "home";
 		}
 	}
 
@@ -83,7 +83,8 @@ public class ChatController {
         return chatMessage;
     }
     
-    @RequestMapping(value = "/students", params = {"id"}, method = RequestMethod.GET, produces = "text/plain")
+    //depreciated
+    @RequestMapping(value = "/studentOLD", params = {"id"}, method = RequestMethod.GET, produces = "text/plain")
     @ResponseBody
     public String getStudentInfo(@RequestParam("id") String id) {
     	String result = studentMap.get(id);

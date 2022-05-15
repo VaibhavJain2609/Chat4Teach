@@ -21,10 +21,11 @@ var colors = [
 function getUsername(url, callback){
     params = new URLSearchParams(window.location.search);
 	console.log("getting username " + params.get("UUID"));
-	jQuery.get(url, {id: params.get("UUID")}, function(data){
-		name = String(data);
-		callback(name);
-	});
+	jQuery.get(url + params.get("UUID"), function(data){
+		var response = data.name;
+		console.log(JSON.stringify(data));
+		callback(response);
+	}, 'json');
 }
 
 function revealChat() {
@@ -45,7 +46,7 @@ function connect(event) {
     
     console.log(currentURL);
     if(currentURL == "/StudentPortal") {
-	    getUsername('/students', function(data){
+	    getUsername('students/UUID/', function(data){
 			username = data;
 			console.log("got username" + username);
 			revealChat();
@@ -141,7 +142,7 @@ function onMessageReceived(payload) {
 	    messageElement.appendChild(textElement);
 	
 	    messageArea.appendChild(messageElement);
-        playSound("notification.mp3")
+        playSound("https://audio.code.org/goal1.mp3")
 	    messageArea.scrollTop = messageArea.scrollHeight;
     }
 }
