@@ -7,6 +7,7 @@ var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
+var nameField = document.querySelector('#name');
 
 var stompClient = null;
 var params = null;
@@ -17,6 +18,12 @@ var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
+
+document.addEventListener("DOMContentLoaded", function(){
+	if (window.location.pathname == "/chat") {
+		nameField.classList.remove('hidden');
+	}
+});
 
 function getUsername(url, callback){
     params = new URLSearchParams(window.location.search);
@@ -52,7 +59,7 @@ function connect(event) {
 			revealChat();
 		});
 	} else if (currentURL == "/chat") {
-		username = 'teacher';
+		username = document.querySelector('#name').value.trim();
 		revealChat();
 	}
     

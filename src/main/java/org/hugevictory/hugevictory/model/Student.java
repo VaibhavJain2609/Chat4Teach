@@ -48,9 +48,8 @@ public class Student {
 		String randomUUID = "";
 		String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-		String specialCharacters = "!@#$";
 		String numbers = "1234567890";
-		String combinedCharacters = capitalCaseLetters + lowerCaseLetters +specialCharacters + numbers;
+		String combinedCharacters = capitalCaseLetters + lowerCaseLetters + numbers;
 		for (int i = 0; i < MAX_LENGTH_UUID; i++){
 			randomUUID += combinedCharacters.charAt((int) (Math.random() *combinedCharacters.length()));
 		}
