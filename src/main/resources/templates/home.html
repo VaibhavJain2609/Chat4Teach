@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <head>
 
 <title>Huge Victory</title>
@@ -13,9 +14,10 @@
 	<div id="buttonStyle">
 
 		<h1>WELCOME!</h1>
-		<a th:href="@{/login}"><button>LOGIN</button></a> <br></br> <a
-			th:href="@{/chat}"><button>CHAT</button></a>
-
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<a th:href="@{/teacher}"><button type="button" class="btn btn-info btn-lg">LOGIN</button></a> <br></br> <a
+				th:href="@{/chat}"><button type="button" class="btn btn-info btn-lg">CHAT</button></a>
+		</div>
 	</div>
 
 </body>
