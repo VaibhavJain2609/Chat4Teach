@@ -17,10 +17,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -29,6 +26,7 @@ public class ChatController {
 	private static boolean isChatRunning = false;
 	private static final String TEACHER_USERNAME = "teacher";
 	private Map<String, String> studentMap = new HashMap<>();
+	@Autowired
 	private ChatMessageService chatMessageService;
 	@Autowired
 	private StudentService studentService;
@@ -71,7 +69,7 @@ public class ChatController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-		 chatMessageService.addChatMessage(chatMessage);
+		chatMessageService.addChatMessage(chatMessage);
         return chatMessage;
     }
 
