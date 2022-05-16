@@ -18,6 +18,9 @@
 <body>
 	<a th:href="@{/home}"
 	   class="btn btn-info btn-sm btn-block" > HOME </a>
+	<br>
+	<a th:href="@{/chat}"><button type="button" class="btn btn-info btn-sm btn-block" >CHAT</button></a>
+
 	<div id="buttonStyle">
 		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 		<br>
