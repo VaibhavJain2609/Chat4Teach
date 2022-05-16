@@ -24,7 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class ChatController {
 	
 	private static boolean isChatRunning = false;
-	private static final String TEACHER_USERNAME = "teacher";
+	private static final String TEACHER_USERNAME = "admin";
 	private Map<String, String> studentMap = new HashMap<>();
 	@Autowired
 	private ChatMessageService chatMessageService;
@@ -62,7 +62,7 @@ public class ChatController {
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
 			}
 		} else {
-			return "home";
+			return "redirect";
 		}
 	}
 

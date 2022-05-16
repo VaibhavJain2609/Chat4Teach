@@ -11,7 +11,7 @@ var nameField = document.querySelector('#name');
 
 var stompClient = null;
 var params = null;
-var currentURL = null;
+var currentURL = window.location.pathname;
 var username = null;
 
 var colors = [
@@ -89,7 +89,7 @@ function onError(error) {
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
     if(messageContent && stompClient) {
-		if(username == 'teacher'){
+		if(currentURL == '/chat'){
 	        var chatMessage = {
 	            sender: username,
 	            content: messageInput.value,
@@ -100,7 +100,7 @@ function sendMessage(event) {
 				sender: username,
 				content: messageInput.value,
 				type: 'DIRECTED',
-				target: 'teacher'
+				target: 'admin'
 			}
 		}
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
@@ -124,7 +124,7 @@ function onMessageReceived(payload) {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
 		messageRecieved = true;
-    } else if (message.type === 'CHAT' || (message.type === 'DIRECTED' && message.target == username) || message.sender == username){
+    } else if (message.type === 'CHAT' || (message.type === 'DIRECTED' && message.target == username) || message.sender == username || (currentURL == '/chat' && message.target == 'admin')){
         messageElement.classList.add('chat-message');
 
         var avatarElement = document.createElement('i');

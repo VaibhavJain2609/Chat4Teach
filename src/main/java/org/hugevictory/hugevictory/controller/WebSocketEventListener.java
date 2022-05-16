@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
@@ -36,9 +38,13 @@ public class WebSocketEventListener {
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);
             
-            if(username.equals("teacher")) {
-            	ChatController.stopChat();
-            }
+            try {
+                if(event.getUser().getName().equals("admin")) {
+                	ChatController.stopChat();
+    			}
+    		} catch(Exception e) {
+    			System.out.println("is a null user");
+    		}
 
             messagingTemplate.convertAndSend("/topic/public", chatMessage);
         }
