@@ -35,6 +35,16 @@ function getUsername(url, callback){
 	}, 'json');
 }
 
+function getStudents(callback){
+    params = new URLSearchParams(window.location.search);
+    console.log("getting students");
+    jQuery.get("/allStudents", function(data){
+        var response = data;
+        console.log(JSON.stringify(data));
+        callback(response);
+    }, 'json');
+}
+
 function revealChat() {
     if(username) {
         usernamePage.classList.add('hidden');
@@ -116,6 +126,7 @@ function onMessageReceived(payload) {
     var messageRecieved = false;
 
     var messageElement = document.createElement('li');
+    var studentElement = document.createElement('li');
     if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
@@ -153,10 +164,32 @@ function onMessageReceived(payload) {
         playSound("https://audio.code.org/goal1.mp3")
 	    messageArea.scrollTop = messageArea.scrollHeight;
     }
+
+    getStudents(function(data){
+        let students = data;
+        console.log("got students" + students);
+        var ul = document.createElement('ul');
+        var div = document.getElementById('studentsInChat');
+        removeAllChildNodes(div);
+        document.getElementById('studentsInChat').appendChild(ul);
+
+        students.forEach(item => {
+            let li = document.createElement('li');
+            ul.appendChild(li);
+
+            li.innerHTML += item;
+        });
+    });
 }
 function playSound(url) {
   const audio = new Audio(url);
   audio.play();
+}
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
 
 function getAvatarColor(messageSender) {

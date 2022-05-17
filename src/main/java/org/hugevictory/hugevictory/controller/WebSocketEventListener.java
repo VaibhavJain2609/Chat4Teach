@@ -1,6 +1,8 @@
 package org.hugevictory.hugevictory.controller;
 
 import org.hugevictory.hugevictory.model.ChatMessage;
+import org.hugevictory.hugevictory.model.Student;
+import org.hugevictory.hugevictory.repository.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class WebSocketEventListener {
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
+    @Autowired
+    private StudentService studentService;
+
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         logger.info("Received a new web socket connection");
@@ -34,6 +39,9 @@ public class WebSocketEventListener {
         if(username != null) {
             logger.info("User Disconnected : " + username);
 
+            Student student = studentService.getStudentByUsername(username);
+            student.setStudentIsOnline(false);
+            studentService.updateStudent(student);
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);

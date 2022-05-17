@@ -3,6 +3,8 @@ package org.hugevictory.hugevictory.controller;
 import java.util.List;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.hugevictory.hugevictory.model.Student;
 import org.hugevictory.hugevictory.repository.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,13 @@ public class StudentController
 	public List<Student> getAllStudents()
 	{
 		return studentService.getAllStudents();
+	}
+
+	@RequestMapping(value="/allStudents", method=RequestMethod.GET)
+	public List<String> getStudents()
+	{
+		List<Student> students = studentService.getAllStudents();
+		return students.stream().map(student -> student.getName() + (student.isStudentIsOnline()?" isOnline":" isOffline")).collect(Collectors.toList());
 	}
 	
 	@RequestMapping(value="/students/UUID/{UUID}", method = RequestMethod.GET, produces = "application/json")

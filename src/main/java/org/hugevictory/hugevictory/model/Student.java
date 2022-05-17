@@ -11,10 +11,20 @@ public class Student {
 	private String UUID;
 	private String name;
 	private boolean chatEnabled;
+	private boolean studentIsOnline;
+
+	public boolean isStudentIsOnline() {
+		return studentIsOnline;
+	}
+
+	public void setStudentIsOnline(boolean studentIsOnline) {
+		this.studentIsOnline = studentIsOnline;
+	}
 
 	public boolean isChatEnabled() {
 		return chatEnabled;
 	}
+
 	public void setIsChatEnabled(boolean chatEnabled) {
 		this.chatEnabled = !chatEnabled;
 	}

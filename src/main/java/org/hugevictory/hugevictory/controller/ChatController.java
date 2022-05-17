@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.hugevictory.hugevictory.model.ChatMessage;
 import org.hugevictory.hugevictory.model.Student;
-import org.hugevictory.hugevictory.repository.ChatMessageRepository;
 import org.hugevictory.hugevictory.repository.ChatMessageService;
 import org.hugevictory.hugevictory.repository.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ChatController {
@@ -40,29 +40,38 @@ public class ChatController {
 	}
 	
 	@RequestMapping("/chat")
-	public String openChat(@AuthenticationPrincipal User user ) {
+	public ModelAndView openChat(@AuthenticationPrincipal User user, ModelAndView modelAndView) {
 		
 		try {
 			if(user.getUsername().equals(TEACHER_USERNAME)) {
 				startChat();
+				modelAndView.addObject("isTeacher", true);
 			}
 		} catch(Exception e) {
 			System.out.println("is a null user");
 		}
-		return "chat";
+
+		modelAndView.setViewName("chat");
+		return modelAndView;
 	}
 	
 	@RequestMapping("/StudentPortal")
-	public String foo(@RequestParam("UUID")String StudentID) {
+	public ModelAndView foo(@RequestParam("UUID")String StudentID, ModelAndView modelAndView) {
 		
 		if(StudentID != null && isChatRunning) {
-			if(studentService.getStudentByUUID(StudentID) != null) {
-				return "chat";
+			Student studentByUUID = studentService.getStudentByUUID(StudentID);
+			if(studentByUUID != null) {
+				studentByUUID.setStudentIsOnline(true);
+				studentService.updateStudent(studentByUUID);
+				modelAndView.addObject("isTeacher", false);
+				modelAndView.setViewName("chat");
+				return modelAndView;
 			} else {
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
 			}
 		} else {
-			return "redirect";
+			modelAndView.setViewName("redirect");
+			return modelAndView;
 		}
 	}
 

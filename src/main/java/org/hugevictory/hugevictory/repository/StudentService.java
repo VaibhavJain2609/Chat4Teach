@@ -56,4 +56,8 @@ public class StudentService
 			return "student not found";
 		}
 	}
+
+    public Student getStudentByUsername(String name) {
+		return studentRepository.findByName(name);
+    }
 }
