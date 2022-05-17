@@ -192,6 +192,15 @@ function removeAllChildNodes(parent) {
     }
 }
 
+function toggleOnlineList(){
+	var x = document.getElementById("studentsInChat");
+	if (x.style.display == "none") {
+		x.style.display = "block";
+	} else {
+		x.style.display = "none";
+	}
+}
+
 function getAvatarColor(messageSender) {
     var hash = 0;
     for (var i = 0; i < messageSender.length; i++) {

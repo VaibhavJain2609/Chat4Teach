@@ -2,12 +2,9 @@ package org.hugevictory.hugevictory.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.hugevictory.hugevictory.model.ChatMessage;
-import org.hugevictory.hugevictory.model.Student;
 import org.hugevictory.hugevictory.repository.ChatMessageService;
-import org.hugevictory.hugevictory.repository.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;

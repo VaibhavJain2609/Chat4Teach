@@ -44,7 +44,7 @@
 		<div id="chat-page" class="hidden">
 			<div class="chat-container">
 				<div class="chat-header">
-					<h2>Classroom Chat</h2>
+					<h2>Classroom Chat</h2> <button onClick="toggleOnlineList()" class="btn btn-danger">Show Students</button>
 				</div>
 				<div class="connecting">Connecting...</div>
 				<ul id="messageArea">
@@ -63,7 +63,7 @@
 		</div>
 	</div>
 
-	<div class="sidenav" th:if="${isTeacher}" id="studentsInChat">
+	<div class="sidenav" th:if="${isTeacher}" id="studentsInChat" style="display:none;">
 		<ul>
 
 		</ul>

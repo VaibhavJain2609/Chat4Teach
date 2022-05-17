@@ -39,9 +39,13 @@ public class WebSocketEventListener {
         if(username != null) {
             logger.info("User Disconnected : " + username);
 
-            Student student = studentService.getStudentByUsername(username);
-            student.setStudentIsOnline(false);
-            studentService.updateStudent(student);
+            try {
+            	Student student = studentService.getStudentByUsername(username);
+            	student.setStudentIsOnline(false);
+                studentService.updateStudent(student);
+            } catch(Exception e) {
+            	System.out.println("disconnecting student is null");
+            }
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setType(ChatMessage.MessageType.LEAVE);
             chatMessage.setSender(username);

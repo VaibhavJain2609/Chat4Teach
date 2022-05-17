@@ -31,20 +31,10 @@
 					<input id = "name" type="text" class="form-control" placeholder="Student Name" th:field="*{name}" />
 
 					<input id = "UUID" type="hidden" th:field="*{UUID}" />
-				</div>
-				<div class="form-group mx-sm-3 mb-2">
-					<label for="name">Chat Enabled</label>
-					<select class="form-control" th:field="*{chatEnabled}">
-						<option th:value="'true'" th:text="True"></option>
-						<option th:value="'false'" th:text="False"></option>
-					</select>
-
 					<br>
-
 					<input class="btn btn-info btn-sm w-50" type="submit" value="Submit">
 				</div>
 			</form>
-			<br>
 		<div class="container-lg">
 			<div class="table-responsive">
 				<div class="table-wrapper">
