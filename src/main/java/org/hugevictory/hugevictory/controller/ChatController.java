@@ -69,7 +69,9 @@ public class ChatController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-		chatMessageService.addChatMessage(chatMessage);
+    	if(isChatRunning) {
+    		chatMessageService.addChatMessage(chatMessage);
+    	}
         return chatMessage;
     }
 
