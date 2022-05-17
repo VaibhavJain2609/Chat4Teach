@@ -17,6 +17,13 @@
 		<div class="d-grid gap-2 col-6 mx-auto">
 			<a th:href="@{/teacher}"><button type="button" class="btn btn-info btn-lg">LOGIN</button></a> <br></br> <a
 				th:href="@{/chat}"><button type="button" class="btn btn-info btn-lg">CHAT</button></a>
+
+		</div>
+		<div class="">
+			<form class ="center-w-50 pp-3" th:action="@{/StudentPortal}" th:object="${student} method = POST">
+			<label>Student's please enter your UUID below:</label>
+			<input type="text" placeholder="Students, please enter your UUID">
+			<button type="submit" value="submit"></button>
 		</div>
 	</div>
 
