@@ -3,13 +3,14 @@
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 200px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
+    z-index: 0; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #111; /* Black */
+    background-color: #17A2B8; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
     color: #e8e8e8;
+    border-style: solid;
 }
 
 /* The navigation menu links */
@@ -18,7 +19,7 @@
     text-decoration: none;
     font-size: 18px;
     color: #f1f1f1;
-    display: block;
+    display: inline-block;
 }
 
 /* When you mouse over the navigation links, change their color */
